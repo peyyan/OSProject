@@ -226,11 +226,37 @@ docker run -itd --net rednet --name c2 busybox sh
 ```
 ***Questions:***
 
-1. Describe what is busybox and what is command switch **--name** is for? . ***(2 mark)*** __Fill answer here__.
-2. Explore the network using the command ```docker network ls```, show the output of your terminal. ***(1 mark)*** __Fill answer here__.
-3. Using ```docker inspect c1``` and ```docker inspect c2``` inscpect the two network. What is the gateway of bluenet and rednet.? ***(1 mark)*** __Fill answer here__.
-4. What is the network address for the running container c1 and c2? ***(1 mark)*** __Fill answer here__.
-5. Using the command ```docker exec c1 ping c2```, which basically tries to do a ping from container c1 to c2. Are you able to ping? Show your output . ***(1 mark)*** __Fill answer here__.
+1. Describe what is busybox and what is command switch **--name** is for? . ***(2 mark)*** 
+```
+Busybox: A single program with many common Unix utilities, saving space on devices. 
+
+`--name` switch (not general): Used with some Busybox commands for specific tasks (like filtering process info in `ps`). 
+```
+2. Explore the network using the command ```docker network ls```, show the output of your terminal. ***(1 mark)*** 
+```
+NETWORK ID     NAME      DRIVER    SCOPE
+c586a05bb764   bluenet   bridge    local
+2e7e045f3a86   bridge    bridge    local
+d3a4369c260f   host      host      local
+3faf02635854   none      null      local
+f3b254818b6f   rednet    bridge    local
+```
+3. Using ```docker inspect c1``` and ```docker inspect c2``` inscpect the two network. What is the gateway of bluenet and rednet.? ***(1 mark)*** 
+```
+bluenet: Gateway - 172.18.0.1
+rednet: Gateway - 172.19.0.1
+```
+4. What is the network address for the running container c1 and c2? ***(1 mark)*** 
+```
+c1 network address: 172.18.0.2
+c2 network address: 172.19.0.2
+```
+5. Using the command ```docker exec c1 ping c2```, which basically tries to do a ping from container c1 to c2. Are you able to ping? Show your output . ***(1 mark)*** 
+```
+ping: bad address 'c2'
+
+No, can't ping to c2
+```
 
 ## Bridging two SUB Networks
 1. Let's try this again by creating a network to bridge the two containers in the two subnetworks
@@ -242,8 +268,27 @@ docker exec c1 ping c2
 ```
 ***Questions:***
 
-1. Are you able to ping? Show your output . ***(1 mark)*** __Fill answer here__.
-2. What is different from the previous ping in the section above? ***(1 mark)*** __Fill answer here__.
+1. Are you able to ping? Show your output . ***(1 mark)*** 
+```
+Yes, can ping c1 to c2
+
+PING c2 (172.20.0.3): 56 data bytes
+64 bytes from 172.20.0.3: seq=0 ttl=64 time=0.138 ms
+64 bytes from 172.20.0.3: seq=1 ttl=64 time=0.081 ms
+64 bytes from 172.20.0.3: seq=2 ttl=64 time=0.071 ms
+64 bytes from 172.20.0.3: seq=3 ttl=64 time=0.062 ms
+64 bytes from 172.20.0.3: seq=4 ttl=64 time=0.101 ms
+64 bytes from 172.20.0.3: seq=5 ttl=64 time=0.079 ms
+64 bytes from 172.20.0.3: seq=6 ttl=64 time=0.098 ms
+64 bytes from 172.20.0.3: seq=7 ttl=64 time=0.088 ms
+64 bytes from 172.20.0.3: seq=8 ttl=64 time=0.073 ms
+64 bytes from 172.20.0.3: seq=9 ttl=64 time=0.084 ms
+64 bytes from 172.20.0.3: seq=10 ttl=64 time=0.089 ms
+```
+2. What is different from the previous ping in the section above? ***(1 mark)*** 
+```
+Docker containers on the same Docker network can't communicate using container names unless explicitly linked but the bridge network acts as a bridge connecting the containers, allowing them to see and communicate with each other using IP addresses.
+```
 
 ## Intermediate Level (10 marks bonus)
 
@@ -377,6 +422,7 @@ CREATE TABLE mytable (
   value VARCHAR(255) NOT NULL
 );
 
+
 INSERT INTO mytable (name, value) VALUES ('example1', 'value1'), ('example2', 'value2'), ('example3', 'value3');
 ```
 
@@ -386,10 +432,21 @@ You have now set up a Node.js application in a Docker container on nodejsnet net
 
 ***Questions:***
 
-1. What is the output of step 5 above, explain the error? ***(1 mark)*** __Fill answer here__.
-2. Show the instruction needed to make this work. ***(1 mark)*** __Fill answer here__.
+1. What is the output of step 5 above, explain the error? ***(1 mark)*** 
 
+<img src="./images/Error.png" width="40%"><br>
+```
+output: Server Error
+It's possible the Node.js application hasn't finished starting up completely when you try to access it with curl and also nodejs-container and mysql-container do not communicate to each other which is their network not link
+```
 
+2. Show the instruction needed to make this work. ***(1 mark)*** 
+```
+1. Create a new network called bridgenet (but in previous instruction we already created bridgenet)
+2. Connect both containers to the bridgenet
+3. Verify if the containers is communicate to each other by using ping
+```
+  ___docker exec nodejs-container ping mysql-container__
 
 ## What to submit
 
