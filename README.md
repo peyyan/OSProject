@@ -420,17 +420,9 @@ At the terminal, create a new directory called **myroot**, and run a instance of
 
 ***Questions:***
 
-<<<<<<< HEAD
 1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)*** 
 ```
 -rw-rw-rw- 1 root root 66 Jul  1 15:19 assignmentOS.txt
-=======
-1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)***
-
-```bash 
--rw-rw-rw- 1 root root 0 Jun 15 12:09 file1.txt
--rw-rw-rw- 1 root root 0 Jun 15 12:09 file2.txt
->>>>>>> 2ebdecb2b7539fd09b9cc7e255c12fdb1a925208
 
 By default, files created within a docker container are owned by the 'root' user and 'root' group unless specified otherwise.
 
@@ -439,10 +431,6 @@ The default permissions are:
 'r--': read-only for the group
 'r--': read-only for others
 ```
-<<<<<<< HEAD
-=======
-
->>>>>>> 2ebdecb2b7539fd09b9cc7e255c12fdb1a925208
 2. Can you change the permission of the files to user codespace.  You will need this to be able to commit and get points for this question. ***(2 mark)***
    
 ```bash 
@@ -450,15 +438,9 @@ The default permissions are:
 sudo chown -R codespace:codespace myroot
 
 ```
-<<<<<<< HEAD
 
 ```
 -rw-rw-rw- 1 codespace codespace 66 Jul  1 15:19 assignmentOS.txt
-=======
-```bash 
--rw-rw-rw- 1 codespace codespace 0 Jun 15 12:09 file1.txt
--rw-rw-rw- 1 codespace codespace 0 Jun 15 12:09 file2.txt
->>>>>>> 2ebdecb2b7539fd09b9cc7e255c12fdb1a925208
 
 Yes, you can change the permissions to these files to other users.
 ```
