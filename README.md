@@ -421,7 +421,7 @@ At the terminal, create a new directory called **myroot**, and run a instance of
 ***Questions:***
 
 1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)***
-   
+   ```bash 
 
 -rw-rw-rw- 1 root root 0 Jun 15 12:09 file1.txt
 -rw-rw-rw- 1 root root 0 Jun 15 12:09 file2.txt
@@ -432,18 +432,20 @@ The default permissions are:
 'rw-': read and write for the owner.
 'r--': read-only for the group
 'r--': read-only for others
-
+```
 
 2. Can you change the permission of the files to user codespace.  You will need this to be able to commit and get points for this question. ***(2 mark)***
-
+```bash 
 //use sudo and chown
 sudo chown -R codespace:codespace myroot
 
 ```
+```bash 
 -rw-rw-rw- 1 codespace codespace 0 Jun 15 12:09 file1.txt
 -rw-rw-rw- 1 codespace codespace 0 Jun 15 12:09 file2.txt
 
 Yes, you can change the permissions to these files to other users.
+```
 
 ## You are on your own, create your own static webpage
 
@@ -473,16 +475,19 @@ docker run --detach -v /workspaces/OSProject/webpage:/usr/local/apache2/htdocs/ 
    
    ```bash
    drwxrwxrwx+ 2 1000 1000 4096 Jun 15 12:32 /usr/local/apache2/htdocs
+   ```
 
 It indicates that everyone have the permission to read, write and execute.
 
 3. What port is the apache web server running. ***(1 mark)*** 
 ```bash
 Port 8080
+```
 
 4. What port is open for http protocol on the host machine? ***(1 mark)*** 
 ```bash
 Port 80
+```
 
 ## Create SUB Networks
 
