@@ -21,3 +21,18 @@ ls -1
 ls-l
 ls -l
 exit
+cd root'
+exit
+cd root
+ls-l
+ls -l
+cd /root
+ls -l
+exit
+ls -;
+ls -l
+ls -1
+cd/root
+cd /root
+ls -l
+exit
