@@ -414,14 +414,29 @@ At the terminal, create a new directory called **myroot**, and run a instance of
 
 ***Questions:***
 
-1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)*** __Fill answer here__.
+1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)*** 
+```
+-rw-rw-rw- 1 root root 66 Jul  1 15:19 assignmentOS.txt
+
+By default, files created within a docker container are owned by the 'root' user and 'root' group unless specified otherwise.
+
+The default permissions are:
+'rw-': read and write for the owner.
+'r--': read-only for the group
+'r--': read-only for others
+```
 2. Can you change the permission of the files to user codespace.  You will need this to be able to commit and get points for this question. ***(2 mark)***
 ```bash
 //use sudo and chown
 sudo chown -R codespace:codespace myroot
 
 ```
-*** __Fill answer here__.***
+
+```
+-rw-rw-rw- 1 codespace codespace 66 Jul  1 15:19 assignmentOS.txt
+
+Yes, you can change the permissions to these files to other users.
+```
 
 ## You are on your own, create your own static webpage
 
